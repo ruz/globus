@@ -14,8 +14,20 @@ plugins:
     config:
       feed:
         - http://perl6.ru/rss/
+        - http://dr-japh.livejournal.com/data/rss
+        - http://feeds.delicious.com/v2/rss/tag/russian+perl?count=15
 
+  - module: Filter::DeliciousFeedTags
+  
   - module: Aggregator::Simple
+
+  - module: Filter::GuessLanguage
+    config:
+      languages:
+        - en
+        - de
+        - ru
+      target: both
 
 #  - module: Filter::Rule
 #    rule:

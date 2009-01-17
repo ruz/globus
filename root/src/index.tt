@@ -3,6 +3,11 @@
 [%debug.dump | html; %]
 items count=[% items.size; %]
 </pre>
+<pre>
+
+Locale: [% C.languages.dump %]
+
+</pre>
 Index ready<br />
 [% FOR item = items %]
 	[% '<hr />' UNLESS loop.last; %]
@@ -11,8 +16,9 @@ Index ready<br />
         padding:20px;
     ">
 		<h3><a href="/item/[% item.keyword | html %]">[% item.title %]</a> ([% item.lang %])</h3>
-        <div><b>link:    </b> [% item.link %] / <b>date:    </b> [% item.date %]</div>
+        <div><b>link:    </b> [% item.link %] / <b>date:    </b> [%item.date%] / [% item.date.strftime('%d.%m.%Y') %]</div>
         <div>[% item.content %]</div>
         <div><b>author:  </b> [% item.author %]</div>
     </div>
-[% END %] 
+[% END %]
+[% PROCESS pager.tt %] 
