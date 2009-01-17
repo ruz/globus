@@ -10,12 +10,17 @@ my $cfg=YAML::LoadFile("Globus.yml");
 
 
 my $schema=Globus::DB->connect(sub {
-			     my $dbh=DBI->connect(@{$cfg->{DB}},{
+                             my ($dsn, $user, $pass) = @{$cfg->{DB}};
+			     my $dbh=DBI->connect($dsn, $user, $pass,{
 								autocommit=>1
 							       });
-			     $dbh->{mysql_enable_utf8}=1;
-			     $dbh->do('set names utf8;');
-			     $dbh->do('set character set utf8;');
+                             if ( $dsn =~ /SQLite/ ) {
+                                 $dbh->{unicode}=1;
+                             } elsif ( $dsn =~ /mysql/ ) {
+                                 $dbh->{mysql_enable_utf8}=1;
+                                 $dbh->do('set names utf8;');
+                                 $dbh->do('set character set utf8;');
+                             }
 			     return $dbh;
 			 });
 
