@@ -10,7 +10,7 @@ __PACKAGE__->add_columns(
   id => { data_type => "INTEGER", default_value => undef, is_nullable => 0, is_auto_increment => 1},
   keyword => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
   link => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
-  date => { data_type => "DATETIME", default_value => '1970-1-1 0:0:0', is_nullable => 1 },
+  date => { data_type => "DATETIME", default_value => '1970-01-01 00:00:00', is_nullable => 1 },
   title => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
   content => { data_type => "TEXT", default_value => undef, is_nullable => 1,},
   author => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
@@ -36,4 +36,9 @@ sub REF {
     my $self=shift;
     return ref $self;
 };
+
+sub hash {
+	my $self = shift;
+	+{ map { $_ => $self->$_ } $self->columns };
+}
 1;
