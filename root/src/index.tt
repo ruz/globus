@@ -3,6 +3,11 @@
 [%debug.dump | html; %]
 items count=[% items.size; %]
 </pre>
+<pre>
+
+Locale: [% C.languages.dump %]
+
+</pre>
 Index ready<br />
 [% FOR item = items %]
 	[% '<hr />' UNLESS loop.last; %]
