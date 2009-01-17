@@ -45,6 +45,15 @@ sub items :Path {
     $c->stash->{template} = 'index.tt';
 }
 
+sub about :Local :Args(0) {
+    my ( $self, $c ) = @_;
+    my $s=$c->{stash};
+    my $schema=$c->model('DB'); #how to optain DB schema in controller
+    $s->{template}='about.tt';
+    $s->{authors} = [ map { +{name=>$_} } qw// ];
+    $s->{debug} = Data::Dumper::Dumper($schema);
+}
+
 sub test :Local :Args(0) {
     my ( $self, $c ) = @_;
     my $s=$c->{stash};

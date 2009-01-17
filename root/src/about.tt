@@ -11,3 +11,9 @@
 [% END %]
 </ul>
 [% END %]
+
+[% IF debug %]
+<pre>
+[% debug | html %]
+</pre>
+[% END %]
