@@ -28,13 +28,22 @@ Globus::Controller::Root - Root Controller for Globus
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+    $c->stash->{'pager'} = $c->create_pager(
+        page_now => $c->req->parameters->{'page'} || 1,
+        page_size => 10,
+        events_count => $c->model('DB::Item')->search()->count(),
+    );
     $c->stash->{items} = [ 
         map {
             my $item = $_;
             $item->{'str_date'} = $item->date->mdy;
             $item;
         } 
-        $c->model('DB::Item')->all 
+        $c->model('DB::Item')->search()->slice(
+            $c->stash->{'pager'}->{'events'}->{'offset'},
+            $c->stash->{'pager'}->{'events'}->{'offset'} +
+              $c->stash->{'pager'}->{'page'}->{'size'}
+          )
     ];
     $c->stash->{template} = 'index.tt';
 }

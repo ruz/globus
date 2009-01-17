@@ -16,6 +16,7 @@ use Catalyst::Runtime '5.70';
 use parent qw/Catalyst/;
 use Catalyst qw/-Debug
 		Globus::Filters
+		Globus::Pager
 		Unicode
 		StackTrace
                 ConfigLoader

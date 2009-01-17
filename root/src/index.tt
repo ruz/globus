@@ -13,4 +13,5 @@
         <div><b>id:      </b> [% item.id %]</div>
         <div><b>title:   </b> [% item.title %]</div>
     </div>
-[% END %] 
+[% END %]
+[% PROCESS pager.tt %] 
