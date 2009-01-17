@@ -12,6 +12,9 @@ requires 'Catalyst::Plugin::StackTrace';
 requires 'Catalyst::Plugin::Unicode';
 requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::View::TT';
+requires 'DBIx::Class';
+requires 'DBD::SQLite';
+requires 'SQL::Translator';
 requires 'parent';
 requires 'ex::lib';
 requires 'Config::General'; # This should reflect the config file format you've chosen
