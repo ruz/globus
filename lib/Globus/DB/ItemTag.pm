@@ -6,7 +6,7 @@ use warnings;
 use base 'DBIx::Class';
 
 __PACKAGE__->load_components("Core");
-__PACKAGE__->table("item_tag");
+__PACKAGE__->table("items_tags");
 __PACKAGE__->add_columns(
   item => { data_type => "INTEGER", default_value => 0, is_nullable => 0},
   tag => { data_type => "INTEGER", default_value => 0, is_nullable => 0},
