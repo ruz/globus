@@ -45,6 +45,22 @@ sub items :Path {
     $c->stash->{template} = 'index.tt';
 }
 
+sub item :Regex('^item\/(\w+)\/(\d{4}-\d{2}-\d{2})') {
+	my ($self,$c,$args) = @_;
+    my ($keyword, $date) = @{ $c->req->captures }; 
+    my $item = $c->model('DB::Item')->single( {date    => $date,
+                                               keyword => $keyword,} );
+	if ($item) {
+        $c->stash->{template} = 'item.tt';
+        $c->stash->{item} = $item;
+    }
+    else {
+        $c->stash->{template} = 'item_not_found.tt';
+    }
+    #use Data::Dumper;
+    #$c->response->body( Dumper($args) );
+}
+
 sub test :Local :Args(0) {
     my ( $self, $c ) = @_;
     my $s=$c->{stash};
