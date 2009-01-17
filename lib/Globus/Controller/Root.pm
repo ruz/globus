@@ -35,6 +35,7 @@ sub index :Path :Args(0) {
 
 sub default :Path {
     my ( $self, $c ) = @_;
+    $c->detach( 'Root', 'items', [ $c->parse_item_filters( $c->req->path ) ] ) if ( $c->req->path =~ /^items(?:\/|$)/ );
     $c->response->body( 'Page not found' );
     $c->response->status(404);
     

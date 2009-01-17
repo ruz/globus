@@ -15,6 +15,7 @@ use Catalyst::Runtime '5.70';
 
 use parent qw/Catalyst/;
 use Catalyst qw/-Debug
+        Filters
 		StackTrace
                 ConfigLoader
                 Static::Simple/;
@@ -34,6 +35,12 @@ __PACKAGE__->config( name => 'Globus' );
 # Start the application
 __PACKAGE__->setup();
 
+# для перла 10го затыкам пасть ворнингам
+$SIG{__WARN__} = sub {
+    my $msg = shift;
+    return if ( $msg =~ /once/ and $msg =~ /NEXT/ );
+    warn $msg;
+};
 
 =head1 NAME
 
