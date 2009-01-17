@@ -1,4 +1,4 @@
-package Catalyst::Plugin::Filters;
+package Catalyst::Plugin::Globus::Filters;
 
 use warnings;
 use strict;
