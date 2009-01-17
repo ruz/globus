@@ -1,9 +1,8 @@
 package Globus;
 
+use utf8;
 use strict;
 use warnings;
-
-use Catalyst::Runtime '5.70';
 
 # Set flags and add plugins for the application
 #
@@ -13,8 +12,8 @@ use Catalyst::Runtime '5.70';
 # Static::Simple: will serve static files from the application's root 
 #                 directory
 
-use parent qw/Catalyst/;
 use Catalyst qw/-Debug
+		I18N
 		Globus::Filters
 		Unicode
 		StackTrace
@@ -22,7 +21,9 @@ use Catalyst qw/-Debug
                 Static::Simple/;
 our $VERSION = '0.01';
 
-# Configure the application. 
+binmode(STDOUT, ':utf8');
+
+# Configure the application.
 #
 # Note that settings in globus.conf (or other external
 # configuration file that you set up manually) take precedence
@@ -37,12 +38,20 @@ __PACKAGE__->config->{static}->{path}=[qw[s]];
 # Start the application
 __PACKAGE__->setup();
 
-# п©Б•╒п©Б•╘я▐Б√░ п©б╘п©Б•ёя▐Б■─п©Б•╘п©Б•÷ 10п©п│п©Б•╛ п©Б•╔п©Б•÷я▐Б■▄я▐Б√─п©Б•╗п©Б•÷п©Б•╙ п©б╘п©Б•÷я▐Б■┌я▐Б■▄я▐Б√└ п©Б•║п©Б•╛я▐Б■─п©Б•╚п©Б•╕п©Б•╚п©п│п©Б•÷п©Б•╙
 $SIG{__WARN__} = sub {
     my $msg = shift;
     return if ( $msg =~ /once/ and $msg =~ /NEXT/ );
     warn $msg;
 };
+
+
+
+
+sub begin : Private {
+    my ( $self, $c ) = @_;
+    $c->response->headers->push_header( 'Vary' => 'Accept-Language' );  # hmm vary and param?
+}
+
 
 =head1 NAME
 

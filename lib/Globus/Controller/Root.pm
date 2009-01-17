@@ -97,7 +97,20 @@ sub about :Local :Args(0) {
     my $s=$c->{stash};
     my $schema=$c->model('DB'); #how to optain DB schema in controller
     $s->{template}='about.tt';
-    $s->{authors} = [ map { +{name=>$_} } qw// ];
+    $s->{authors} = [ map { +{name=>$_} } qw/
+        bessarabov
+        diver
+        dsimonov
+        dyno
+        green
+        hsw
+        kappa
+        mons
+        naim
+        ruz
+        untone
+        vany
+    / ];
     $s->{stat} = [
         map { +{ name => "$_\'s", count => $c->model("DB::$_")->count } }
         qw/Item Tag ItemTag/
