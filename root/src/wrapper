@@ -1,1 +1,10 @@
-[% INCLUDE $template %]
+[%- # -*- Encoding: utf-8; mode: html -*- -%]
+[%- IF layout=='plain' -%]
+[% content %]
+[%- ELSE -%]
+<html>
+<head>
+</head>
+[% content %]
+</html>
+[%- END -%]
