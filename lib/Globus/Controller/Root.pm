@@ -123,14 +123,15 @@ sub about :Local :Args(0) {
     $s->{template}='about.tt';
     $s->{authors} = [ map { +{name=>$_} } qw/
         bessarabov
-        diver
+        d1v3r
         dsimonov
-        dyno
+        nordicdyno
         green
         hsw
         kappa
         mons
         naim
+        pippo
         ruz
         untone
         vany
