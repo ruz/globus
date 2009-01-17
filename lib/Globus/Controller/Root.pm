@@ -3,7 +3,7 @@ package Globus::Controller::Root;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
-use DateTime;
+use DateTime::Format::MySQL;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -65,33 +65,23 @@ sub items :Path {
 		$rs = $c->model('DB::Item')->search({});
 	}
 	
+	for ( @{ $args->{author} || [] } ) {
+		push @{ $search_items->{author} ||= [] }, $_;
+	}
 	for ( @{ $args->{date} || [] } ) {
-		if ($_->{day}) {
+		if (0&&$_->{day}) {
 			push @{ $search_items->{date} ||= [] }, DateTime->new(%$_);
 		}else{
-			my $fr = {%$_};
-			my $to = {%$_};
-			$fr->{day} ||= 1;
-			$fr->{month} ||=1;
-			$to->{day} ||= 31;
-			$to->{month} ||=12;
+			my $fr = {hour => 0,  minute => 0,  second => 0,  day => 1, month => 1, %$_};
+			my $to = {hour => 23, minute => 59, second => 59, day => 31, month => 12, %$_};
 			push @{ $search_items->{date} ||= [] },
-				{ between => [ join('-',@$fr{qw(year month day)}),join('-',@$to{qw(year month day)}) ] };
+				{ between => [ map DateTime->new(%$_),$fr,$to ] };
 		}
 	}
 	use SQL::Abstract;
 	my $sqa = SQL::Abstract->new();
 
-=rem SQL
-
-select i.*, t.* from items i
-	inner join items_tags it on i.id=it.item
-	inner join tags t on t.id = it.tag;
-
-=cut
-
-#	$c->stash->{items} = [ $rs->search($search_items) ];
-	$c->stash->{items} = [ $rs->search({})->all ];
+	$c->stash->{items} = [ $rs->search($search_items) ];
 	$c->stash->{debug} = {
 		args => $args,
 		items => $search_items,
