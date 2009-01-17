@@ -6,13 +6,8 @@ package Plagger::Plugin::Globus::Publish::Items;
 use base qw(Plagger::Plugin);
 
 use Globus::DB;
-our $schema = Globus::DB->connect;
 use DateTime::Format::ISO8601;
 use Data::Dumper;
-print Dumper($schema);
-print Dumper($schema->resultset('Item')->all);
-
-use Globus::DB::Item;
 
 sub register {
     my ($self, $context) = @_;
@@ -25,16 +20,16 @@ sub register {
 sub feed {
     my ($self, $context, $args) = @_;
 
+    my $schema = Globus::DB->connect( Globus::DB->our_connect_handler );
+
     my $lang = $self->conf->{lang} || 'en';
     foreach my $entry ($args->{feed}->entries) {
 
-        my %create_args;
-        @create_args{qw(lang title content author date)} =
-            ($lang, $entry->title, $entry->body, $entry->author, $entry->date);
-
-        $create_args{date} = DateTime::Format::ISO8601->parse_datetime( $create_args{date} );
-        print Dumper($create_args{date}) . "\n". $create_args{date} . "\n";
-        my $record = Globus::DB->resultset('Item')->create( \%create_args );
+        $schema->populate('Item' =>  [
+            [qw(lang keyword source link title content author date)],
+            [$lang, 'test', 'test', 'test', $entry->title, $entry->body, $entry->author || 'test', DateTime::Format::ISO8601->parse_datetime( $entry->date ) ],
+        ]);
+        last;
     }
 
     $context->log(

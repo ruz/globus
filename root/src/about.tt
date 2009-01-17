@@ -1,0 +1,19 @@
+[% META title = 'About page' %]
+<H1>About page</H1>
+
+<p>HackMeet 2009.01.17</p>
+
+[% IF authors %]
+<p>Authors:</p>
+<ul>
+[% FOREACH author IN authors %]
+<li>[% author.name | html %]</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF debug %]
+<pre>
+[% debug | html %]
+</pre>
+[% END %]
