@@ -11,3 +11,26 @@
 [% END %]
 </ul>
 [% END %]
+
+[% IF stat %]
+<table border="1">
+<caption>Statistics:</caption>
+<thead>
+<tr><th>name</th><th>count</th></tr>
+</thead>
+<tbody>
+[% FOREACH s IN stat %]
+<tr>
+<td>[% s.name | html %]</td>
+<td>[% s.count | html %]</td>
+</tr>
+[% END %]
+</tbody>
+</table>
+[% END %]
+
+[% IF debug %]
+<pre>
+[% debug | html %]
+</pre>
+[% END %]
