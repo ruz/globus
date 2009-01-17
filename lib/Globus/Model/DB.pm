@@ -4,16 +4,20 @@ use strict;
 use base 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config(
-    schema_class => 'Globus::DB',
-                    connect_info => [sub {
-                                         my $dbh=DBI->connect(@{Globus->config->{DB}},{
-                                                                                     autocommit=>1
-                                                                                    });
-                                         $dbh->{mysql_enable_utf8}=1;
-                                         $dbh->do('set names utf8;');
-                                         $dbh->do('set character set utf8;');
-                                         return $dbh;
-                                     }],
+	schema_class => 'Globus::DB',
+		connect_info => [sub {
+			my ($dsn, $user, $pass) = @{$cfg->{DB}};
+			my $dbh=DBI->connect($dsn, $user, $pass,{ autocommit=>1 });
+			if ( $dsn =~ /SQLite/ ) {
+				$dbh->{unicode}=1;
+			} elsif ( $dsn =~ /mysql/ ) {
+				$dbh->{mysql_enable_utf8}=1;
+				$dbh->do('set names utf8;');
+				$dbh->do('set character set utf8;');
+			}
+			return $dbh;
+		}
+	],
 );
 
 
