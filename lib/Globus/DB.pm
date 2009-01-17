@@ -6,6 +6,7 @@ use warnings;
 use base 'DBIx::Class::Schema';
 __PACKAGE__->load_classes;
 
+use YAML;
 my $cfg=YAML::LoadFile("globus.yml");
 
 sub our_connect_handler {
