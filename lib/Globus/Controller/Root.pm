@@ -111,15 +111,15 @@ sub about :Local :Args(0) {
         d1v3r
         dsimonov
         nordicdyno
-        green
+        Green
         hsw
         kappa
-        mons
-        naim
+        Mons
         pippo
         ruz
+        shafiev
         untone
-        vany
+        Vany
     / ];
     $s->{stat} = [
         map { +{ name => "$_\'s", count => $c->model("DB::$_")->count } }
