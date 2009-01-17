@@ -31,10 +31,16 @@ sub feed {
         my $keyword = $date->ymd('_') .' '. unidecode( $title );
         $keyword =~ s/\s+/_/;
 
-        $schema->populate('Item' =>  [
-            [qw(lang keyword source link title content author date)],
-            [$lang, $keyword, 'test', $link, $entry->title, $entry->body, $entry->author || 'test', $date ],
-        ]);
+        $schema->resultset('Item')->create( {
+            lang => $lang,
+            keyword => $keyword,
+            source => 'test',
+            link => $link,
+            title => $entry->title,
+            content => $entry->body,
+            author => $entry->author || 'test',
+            date => $date,
+        });
     }
 
     $context->log(
