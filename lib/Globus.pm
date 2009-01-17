@@ -15,7 +15,7 @@ use Catalyst::Runtime '5.70';
 
 use parent qw/Catalyst/;
 use Catalyst qw/-Debug
-        Filters
+		Globus::Filters
 		Unicode
 		StackTrace
                 ConfigLoader
@@ -36,7 +36,7 @@ __PACKAGE__->config( name => 'Globus' );
 # Start the application
 __PACKAGE__->setup();
 
-# для перла 10го затыкам пасть ворнингам
+# п╢п╩я▐ п©п╣я─п╩п╟ 10пЁп╬ п╥п╟я┌я▀п╨п╟п╪ п©п╟я│я┌я▄ п╡п╬я─п╫п╦п╫пЁп╟п╪
 $SIG{__WARN__} = sub {
     my $msg = shift;
     return if ( $msg =~ /once/ and $msg =~ /NEXT/ );
