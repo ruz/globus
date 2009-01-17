@@ -92,11 +92,10 @@ sub items :Path {
     $c->stash->{template} = 'index.tt';
 }
 
-sub item :Regex('^item\/(\w+)\/(\d{4}-\d{2}-\d{2})') {
-	my ($self,$c,$args) = @_;
-    my ($keyword, $date) = @{ $c->req->captures }; 
-    my $item = $c->model('DB::Item')->single( {date    => $date,
-                                               keyword => $keyword,} );
+#sub item :Regex('^item\/(\w+)') {
+sub item :Local Args(1) {
+	my ($self,$c,$keyword) = @_;
+    my $item = $c->model('DB::Item')->single( { keyword => $keyword,} );
 	if ($item) {
         $c->stash->{template} = 'item.tt';
         $c->stash->{item} = $item;
