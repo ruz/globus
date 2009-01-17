@@ -1,0 +1,136 @@
+html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, ol, ul, fieldset, label, legend, caption {
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	border:0 0 0 0;
+	font-weight:inherit;
+	font-style:inherit;
+	font-size:100.1%;
+	font-family:inherit;
+	letter-spacing:-.15pt;
+	}
+body {
+	font-family:sans-serif;
+	line-height: 1.7em;
+	vertical-align:baseline;
+	background-color:#fff;
+	color:#333;
+	}
+a:link, a:visited {
+	color:#666;
+	}
+a:hover, a:active {
+	background-color:#dedede;
+	color:#333;
+	}
+ol, ul {
+	list-style: none;
+	list-style-type: none;
+	text-indent: 0;
+	}
+h1,h2,h3,h4,h5,h6 {
+	font-weight:normal;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	}
+#wrapper {
+	margin:2em 2em;
+	/* border: 1px solid #999; */
+	}
+#header {
+	margin-bottom:2.2em;
+	border-bottom:1px solid #999;
+	}	
+#header h1 {
+	font-family:'Courier New',monospace;
+	font-size:5em;
+	font-weight:bold;
+	margin:0 0 .5em -.1em;
+	}
+	#header h1 a {
+		color:#333;
+		letter-spacing:-3pt;
+		text-decoration:none;
+		}
+#sidebar {
+	width:250px;
+	margin-left:1em;
+	min-height:500px; /* for modern browsers */
+	height:auto !important; /* for modern browsers */
+	height:500px; /* for IE5.x and IE6 */
+	float:right;
+	background:#eee url('/onion.png') 50% 40px no-repeat;
+	/* background-color:#dedede; */
+	border:1px solid #ececec;
+	}
+	#sidebar .authors {
+		margin:220px 0 0 15px;
+		font-size:.8em;
+		}
+#content { 
+	margin-right:270px;
+	min-height:500px; /* for modern browsers */
+	height:auto !important; /* for modern browsers */
+	height:500px; /* for IE5.x and IE6 */
+	/* background-color:#ededed; */
+	}
+
+.entry .heading {
+	border-bottom:1px solid #ccc;
+	margin-left:70px
+	}
+.entry .heading .title {
+	font-size:1.4em;
+	}
+.entry .heading .author {
+	font-size:1em;
+	padding-bottom:.25em;
+	}
+	.entry .heading a {
+		text-decoration:none;
+		}
+.entry .heading .avatar {
+	float:left;
+	margin:-26px 0 0 -70px;
+	}
+	.entry .heading .avatar img {
+		padding:4px;
+		border: 1px solid #999;
+		}
+.entry .timestamp {
+	float:right;
+	font-size:.75em;
+	letter-spacing:0;
+	color:#888;
+	}
+.entry {
+	margin-bottom:3em;
+	}
+
+
+.entry ol, .entry ul {
+	list-style: none;
+	list-style-type: none;
+	text-indent: 0;
+	}
+.entry p {
+	text-indent:1em;
+	}
+.entry .tags {
+	overflow:hidden;
+	font-style:italic;
+	}
+.entry .tags dt, .entry .tags dd {
+	float:left;
+	font-size:.85em;
+	}
+
+
+
+#footer {
+	clear:both;
+	margin-top:1.2em;
+	border-top:1px solid #999;
+	}
+#footer li {
+	float:left;
+	}
