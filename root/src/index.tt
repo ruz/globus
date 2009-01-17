@@ -1,0 +1,4 @@
+<pre>[%
+	debug.dump | html
+%]</pre>
+Index ready

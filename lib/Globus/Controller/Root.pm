@@ -29,8 +29,9 @@ Globus::Controller::Root - Root Controller for Globus
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    # Hello World
-    $c->response->body( $c->welcome_message );
+    # Hello Wrld
+	$c->stash->{template} = 'index.tt';
+    #$c->response->body( $c->welcome_message );
 }
 
 sub default :Path {
