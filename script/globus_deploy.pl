@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use strict;
-use lib "lib";
+use ex::lib "../lib";
 use Data::Dumper;
 use YAML qw(Dump Bless);
 
