@@ -32,11 +32,12 @@ our $VERSION = '0.01';
 # local deployment.
 
 __PACKAGE__->config( name => 'Globus' );
+__PACKAGE__->config->{static}->{path}=[qw[s]];
 
 # Start the application
 __PACKAGE__->setup();
 
-# п╢п╩я▐ п©п╣я─п╩п╟ 10пЁп╬ п╥п╟я┌я▀п╨п╟п╪ п©п╟я│я┌я▄ п╡п╬я─п╫п╦п╫пЁп╟п╪
+# п©Б•╒п©Б•╘я▐Б√░ п©б╘п©Б•ёя▐Б■─п©Б•╘п©Б•÷ 10п©п│п©Б•╛ п©Б•╔п©Б•÷я▐Б■▄я▐Б√─п©Б•╗п©Б•÷п©Б•╙ п©б╘п©Б•÷я▐Б■┌я▐Б■▄я▐Б√└ п©Б•║п©Б•╛я▐Б■─п©Б•╚п©Б•╕п©Б•╚п©п│п©Б•÷п©Б•╙
 $SIG{__WARN__} = sub {
     my $msg = shift;
     return if ( $msg =~ /once/ and $msg =~ /NEXT/ );

@@ -4,6 +4,7 @@
 [%- ELSE -%]
 <html>
 <head>
+<link rel="shortcut icon" type="image/x-icon" href="/s/favicon.ico" />
 </head>
 [% content %]
 </html>
