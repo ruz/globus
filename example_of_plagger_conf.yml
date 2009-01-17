@@ -1,3 +1,4 @@
+# run: perl -I lib/ /opt/local/bin/plagger -c example_of_plagger_conf.yml
 ---
 global:
   timezone: Europe/Moscow
@@ -21,7 +22,7 @@ plugins:
 #      - module: Deduped
 #        path: /tmp/plagger-moscow.db
 
-  - module: Publish::MoscowNews
+  - module: Globus::Publish::Items
     config:
       lang: ru
 

@@ -1,5 +1,16 @@
-[%- # -*- Encoding: utf-8; mode: html -*- -%]
-<pre>[%
-	debug.dump | html
-%]</pre>
-Index ready
+[% FOREACH item IN items %]
+    <div style="
+        border-bottom: 1px dashed red;
+        padding:20px;
+    ">
+        <div><b>source:  </b> [% item.source %]</div>
+        <div><b>link:    </b> [% item.link %]</div>
+        <div><b>keyword: </b> [% item.keyword %]</div>
+        <div><b>lang:    </b> [% item.lang %]</div>
+        <div><b>date:    </b> [% item.str_date %]</div>
+        <div><b>content: </b> [% item.content %]</div>
+        <div><b>author:  </b> [% item.author %]</div>
+        <div><b>id:      </b> [% item.id %]</div>
+        <div><b>title:   </b> [% item.title %]</div>
+    </div>
+[% END %] 

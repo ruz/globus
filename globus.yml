@@ -3,7 +3,7 @@
 # you want to use yaml like in old versions of Catalyst
 name: Globus
 DB:
-#    - DBI:mysql:database=globus;host=localhost
-    - DBI:SQLite:dbname=globus.db
+    - DBI:mysql:database=globus;host=localhost
+#    - DBI:SQLite:dbname=globus.db
     - globususer
     - globuspassword 
