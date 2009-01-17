@@ -28,7 +28,14 @@ Globus::Controller::Root - Root Controller for Globus
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-	$c->stash->{items} = [ $c->model('DB::Item')->all ];
+    $c->stash->{items} = [ 
+        map {
+            my $item = $_;
+            $item->{'str_date'} = $item->date->mdy;
+            $item;
+        } 
+        $c->model('DB::Item')->all 
+    ];
     $c->stash->{template} = 'index.tt';
 }
 
