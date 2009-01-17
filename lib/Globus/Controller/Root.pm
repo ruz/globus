@@ -3,6 +3,7 @@ package Globus::Controller::Root;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
+use DateTime::Format::MySQL;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -48,7 +49,46 @@ sub default :Path {
 
 sub items :Path {
 	my ($self,$c,$args) = @_;
-	$c->stash->{items} = [ $c->model('DB::Item')->all ];
+	
+	my $search_items;
+	my $search_tags;
+	my $rs;
+	if ($args->{tag}) {
+		$search_tags = { 'en' => [  'a','b' ] };
+		$rs = $c->model('DB::Tag')
+			->search($search_tags)
+			->search_related('doctags')
+			->search_related('item')
+			#->items
+		;
+	}else{
+		$rs = $c->model('DB::Item')->search({});
+	}
+	
+	for ( @{ $args->{author} || [] } ) {
+		push @{ $search_items->{author} ||= [] }, $_;
+	}
+	for ( @{ $args->{date} || [] } ) {
+		if (0&&$_->{day}) {
+			push @{ $search_items->{date} ||= [] }, DateTime->new(%$_);
+		}else{
+			my $fr = {hour => 0,  minute => 0,  second => 0,  day => 1, month => 1, %$_};
+			my $to = {hour => 23, minute => 59, second => 59, day => 31, month => 12, %$_};
+			push @{ $search_items->{date} ||= [] },
+				{ between => [ map DateTime->new(%$_),$fr,$to ] };
+		}
+	}
+	use SQL::Abstract;
+	my $sqa = SQL::Abstract->new();
+
+	$c->stash->{items} = [ $rs->search($search_items) ];
+	$c->stash->{debug} = {
+		args => $args,
+		items => $search_items,
+		tags => $search_tags,
+		where_t => $sqa->where($search_tags),
+		where_i => $sqa->where($search_items),
+	};
     $c->stash->{template} = 'index.tt';
 }
 
