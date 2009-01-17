@@ -1,8 +1,8 @@
 [% META title = 'About page' %]
 <H1>About page</H1>
-
+ 
 <p>HackMeet 2009.01.17</p>
-
+ 
 [% IF authors %]
 <p>Authors:</p>
 <ul>
@@ -11,7 +11,7 @@
 [% END %]
 </ul>
 [% END %]
-
+ 
 [% IF stat %]
 <table border="1">
 <caption>Statistics:</caption>
@@ -28,7 +28,7 @@
 </tbody>
 </table>
 [% END %]
-
+ 
 [% IF debug %]
 <pre>
 [% debug | html %]
