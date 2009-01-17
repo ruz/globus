@@ -8,6 +8,7 @@ use base qw(Plagger::Plugin);
 use Globus::DB;
 use DateTime::Format::ISO8601;
 use Text::Unidecode;
+use Class::Date qw();
 
 use Data::Dumper;
 
@@ -47,7 +48,7 @@ sub feed {
             title => $entry->title,
             content => $entry->body,
             author => $entry->author || 'test',
-            date => $date,
+            date => Class::Date->new( $date->epoch() ) ,
         });
 
     }
