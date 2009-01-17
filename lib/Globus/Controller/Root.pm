@@ -28,9 +28,7 @@ Globus::Controller::Root - Root Controller for Globus
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    # Hello World
-    $c->response->body( $c->welcome_message );
+    $c->stash->{template} = 'index.tt';
 }
 
 sub default :Path {
@@ -38,8 +36,17 @@ sub default :Path {
     $c->detach( 'Root', 'items', [ $c->parse_item_filters( $c->req->path ) ] ) if ( $c->req->path =~ /^items(?:\/|$)/ );
     $c->response->body( 'Page not found' );
     $c->response->status(404);
-    
 }
+
+
+
+sub test :Local :Args(0) {
+    my ( $self, $c ) = @_;
+    my $s=$c->{stash};
+    my $schema=$c->model('DB'); #how to optain DB schema in controller
+    $s->{template}='test.tt';
+}
+
 
 =head2 end
 
