@@ -6,8 +6,7 @@ use parent 'Catalyst::View::TT';
 
 use Template::Stash;
 
-sub import {
-	shift;
+BEGIN {
 	$Template::Stash::SCALAR_OPS->{ dump } =
 	$Template::Stash::HASH_OPS->{ dump } =
 	$Template::Stash::LIST_OPS->{ dump } = sub {
