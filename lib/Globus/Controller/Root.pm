@@ -108,17 +108,18 @@ sub about :Local :Args(0) {
     $s->{template}='about.tt';
     $s->{authors} = [ map { +{name=>$_} } qw/
         bessarabov
-        diver
+        d1v3r
         dsimonov
-        dyno
-        green
+        nordicdyno
+        Green
         hsw
         kappa
-        mons
-        naim
+        Mons
+        pippo
         ruz
+        shafiev
         untone
-        vany
+        Vany
     / ];
     $s->{stat} = [
         map { +{ name => "$_\'s", count => $c->model("DB::$_")->count } }
