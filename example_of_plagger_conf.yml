@@ -2,7 +2,7 @@
 global:
   timezone: Europe/Moscow
   timeout: 60
-  assets_path: /home/cubic/projs/moscow.pm/trunk/plagger/assets
+  assets_path: plagger/assets
   log:
     level: debug
   cache:
