@@ -14,6 +14,7 @@ requires 'Catalyst::Action::RenderView';
 requires 'Catalyst::View::TT';
 requires 'DBIx::Class';
 requires 'DBD::SQLite';
+requires 'Catalyst::Model::DBIC::Schema';
 requires 'SQL::Translator';
 requires 'parent';
 requires 'ex::lib';
