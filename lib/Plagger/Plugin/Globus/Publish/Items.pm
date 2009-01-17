@@ -5,6 +5,13 @@ package Plagger::Plugin::Globus::Publish::Items;
 
 use base qw(Plagger::Plugin);
 
+use Globus::DB;
+our $schema = Globus::DB->connect;
+use DateTime::Format::ISO8601;
+use Data::Dumper;
+print Dumper($schema);
+print Dumper($schema->resultset('Item')->all);
+
 use Globus::DB::Item;
 
 sub register {
@@ -22,10 +29,12 @@ sub feed {
     foreach my $entry ($args->{feed}->entries) {
 
         my %create_args;
-        @create_args{qw(lang title body author published)} =
+        @create_args{qw(lang title content author date)} =
             ($lang, $entry->title, $entry->body, $entry->author, $entry->date);
 
-        my $record = Globus::DB::Item->create( \%create_args );
+        $create_args{date} = DateTime::Format::ISO8601->parse_datetime( $create_args{date} );
+        print Dumper($create_args{date}) . "\n". $create_args{date} . "\n";
+        my $record = Globus::DB->resultset('Item')->create( \%create_args );
     }
 
     $context->log(
