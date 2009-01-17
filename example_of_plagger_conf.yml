@@ -21,13 +21,13 @@ plugins:
   
   - module: Aggregator::Simple
 
-  - module: Filter::GuessLanguage
-    config:
-      languages:
-        - en
-        - de
-        - ru
-      target: both
+#  - module: Filter::GuessLanguage
+#    config:
+#      languages:
+#        - en
+#        - de
+#        - ru
+#      target: both
 
 #  - module: Filter::Rule
 #    rule:
