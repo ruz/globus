@@ -28,6 +28,7 @@ Globus::Controller::Root - Root Controller for Globus
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+	$c->stash->{items} = [ $c->model('DB::Item')->all ];
     $c->stash->{template} = 'index.tt';
 }
 
@@ -38,7 +39,11 @@ sub default :Path {
     $c->response->status(404);
 }
 
-
+sub items :Path {
+	my ($self,$c,$args) = @_;
+	$c->stash->{items} = [ $c->model('DB::Item')->all ];
+    $c->stash->{template} = 'index.tt';
+}
 
 sub test :Local :Args(0) {
     my ( $self, $c ) = @_;
