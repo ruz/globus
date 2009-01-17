@@ -3,8 +3,9 @@ package Globus::DB::Item;
 use strict;
 use warnings;
 
+use Class::Date ();
 use base 'DBIx::Class';
-__PACKAGE__->load_components(qw/InflateColumn::DateTime UTF8Columns Core/);
+__PACKAGE__->load_components(qw/UTF8Columns Core/);
 __PACKAGE__->table("items");
 __PACKAGE__->add_columns(
   id => { data_type => "INTEGER", default_value => undef, is_nullable => 0, is_auto_increment => 1},
@@ -21,6 +22,13 @@ __PACKAGE__->add_columns(
 __PACKAGE__->utf8_columns(qw/keyword title content author source/);
 __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("item_keyword_Idx", ["keyword"]);
+
+__PACKAGE__->inflate_column(
+    date => {
+        'inflate'   => sub { Class::Date::date($_[0]) },
+        'deflate'   => sub { $_[0]->string },
+    }
+);
 
 sub sqlt_deploy_hook {
     my ($self, $table) = @_;

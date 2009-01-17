@@ -29,13 +29,22 @@ Globus::Controller::Root - Root Controller for Globus
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
+    $c->stash->{'pager'} = $c->create_pager(
+        page_now => $c->req->parameters->{'page'} || 1,
+        page_size => 10,
+        events_count => $c->model('DB::Item')->search()->count(),
+    );
     $c->stash->{items} = [ 
         map {
             my $item = $_;
             $item->{'str_date'} = $item->date->mdy;
             $item;
         } 
-        $c->model('DB::Item')->all 
+        $c->model('DB::Item')->search()->slice(
+            $c->stash->{'pager'}->{'events'}->{'offset'},
+            $c->stash->{'pager'}->{'events'}->{'offset'} +
+              $c->stash->{'pager'}->{'page'}->{'size'}
+          )
     ];
     $c->stash->{template} = 'index.tt';
 }
@@ -97,7 +106,20 @@ sub about :Local :Args(0) {
     my $s=$c->{stash};
     my $schema=$c->model('DB'); #how to optain DB schema in controller
     $s->{template}='about.tt';
-    $s->{authors} = [ map { +{name=>$_} } qw// ];
+    $s->{authors} = [ map { +{name=>$_} } qw/
+        bessarabov
+        diver
+        dsimonov
+        dyno
+        green
+        hsw
+        kappa
+        mons
+        naim
+        ruz
+        untone
+        vany
+    / ];
     $s->{stat} = [
         map { +{ name => "$_\'s", count => $c->model("DB::$_")->count } }
         qw/Item Tag ItemTag/
