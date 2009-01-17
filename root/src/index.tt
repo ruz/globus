@@ -1,5 +1,12 @@
 [%- # -*- Encoding: utf-8; mode: html -*- -%]
-<pre>[%
-	debug.dump | html
-%]</pre>
-Index ready
+<pre>
+[%debug.dump | html; %]
+items count=[% items.size; %]
+</pre>
+Index ready<br />
+[% FOR item = items %]
+<hr />
+[% 	FOR col = item.columns %]
+	[%col%]=[% item.$col%]<br />
+[% END %]
+[% END %]

@@ -3,6 +3,7 @@ package Globus::Controller::Root;
 use strict;
 use warnings;
 use parent 'Catalyst::Controller';
+use DateTime;
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -41,7 +42,56 @@ sub default :Path {
 
 sub items :Path {
 	my ($self,$c,$args) = @_;
-	$c->stash->{items} = [ $c->model('DB::Item')->all ];
+	
+	my $search_items;
+	my $search_tags;
+	my $rs;
+	if ($args->{tag}) {
+		$search_tags = { 'en' => [  'a','b' ] };
+		$rs = $c->model('DB::Tag')
+			->search($search_tags)
+			->search_related('doctags')
+			->search_related('item')
+			#->items
+		;
+	}else{
+		$rs = $c->model('DB::Item')->search({});
+	}
+	
+	for ( @{ $args->{date} || [] } ) {
+		if ($_->{day}) {
+			push @{ $search_items->{date} ||= [] }, DateTime->new(%$_);
+		}else{
+			my $fr = {%$_};
+			my $to = {%$_};
+			$fr->{day} ||= 1;
+			$fr->{month} ||=1;
+			$to->{day} ||= 31;
+			$to->{month} ||=12;
+			push @{ $search_items->{date} ||= [] },
+				{ between => [ join('-',@$fr{qw(year month day)}),join('-',@$to{qw(year month day)}) ] };
+		}
+	}
+	use SQL::Abstract;
+	my $sqa = SQL::Abstract->new();
+
+=rem SQL
+
+select i.*, t.* from items i
+	inner join items_tags it on i.id=it.item
+	inner join tags t on t.id = it.tag;
+
+=cut
+
+#	$c->stash->{items} = [ $rs->search($search_items) ];
+	$c->stash->{items} = [ $rs->search({})->all ];
+	$c->stash->{debug} = {
+		args => $args,
+		items => $search_items,
+		tags => $search_tags,
+		where_t => $sqa->where($search_tags),
+		where_i => $sqa->where($search_items),
+	};
     $c->stash->{template} = 'index.tt';
 }
 
