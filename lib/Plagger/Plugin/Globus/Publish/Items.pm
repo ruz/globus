@@ -7,6 +7,8 @@ use base qw(Plagger::Plugin);
 
 use Globus::DB;
 use DateTime::Format::ISO8601;
+use Text::Unidecode;
+
 use Data::Dumper;
 
 sub register {
@@ -22,16 +24,22 @@ sub feed {
 
     my $schema = Globus::DB->connect( Globus::DB->our_connect_handler );
 
-    my $lang = $self->conf->{lang} || 'en';
+    my $feed = $args->{feed};
+    my $feed_lang = $feed->language;
     foreach my $entry ($args->{feed}->entries) {
         my $link = $entry->permalink;
         my $title = $entry->title;
         my $date = DateTime::Format::ISO8601->parse_datetime( $entry->date );
-        use Text::Unidecode;
         my $keyword = $date->ymd('_') .' '. unidecode( $title );
         $keyword =~ s/\s+/_/;
 
-        $schema->resultset('Item')->create( {
+        my $lang = $entry->language || $feed_lang;
+        print "$link $language";
+        my $tags = $entry->tags;
+
+        #print Dumper( $tags );
+
+        my $item = $schema->resultset('Item')->find_or_create( {
             lang => $lang,
             keyword => $keyword,
             source => 'test',
@@ -41,6 +49,7 @@ sub feed {
             author => $entry->author || 'test',
             date => $date,
         });
+
     }
 
     $context->log(

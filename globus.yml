@@ -6,4 +6,4 @@ DB:
 #    - DBI:mysql:database=globus;host=localhost
     - DBI:SQLite:dbname=globus.db
     - globususer
-    - globuspassword 
+    - globuspassword

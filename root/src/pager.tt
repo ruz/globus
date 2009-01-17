@@ -1,0 +1,63 @@
+[% 
+    count_page      = pager.page.count || 1;
+    now             = pager.page.now || 1;
+    limit           = limit || 7;
+    pager_query     = pager_query || '?page=';
+    start_count     = start_count || 1;
+    end_count       = count_page > (limit * 2 + 1) ? (limit * 2 + 1) : count_page;
+%]
+[%
+    IF count_page > 1
+%]
+<div class="fr-pagelister r--normal">
+[%
+        IF count_page < now;
+            now = count_page;
+        END;
+%]
+Страницы:&nbsp;
+[%
+        IF now > 1
+%]
+<a href="[% pager_query _ (now - 1) %]" class="fr-next">&larr; предыдущая</a>
+[%
+        END;
+        IF now < count_page;
+%]
+<a href="[% pager_query _ (now + 1) %]" class="fr-next">следующая &rarr;</a>
+[%
+        END
+%]
+<p>
+[%
+        IF now > limit + 1
+%]
+<a href="[% pager_query %]1">Первая</a>
+<a href="[% pager_query _ (now - limit - 1) %]">...</a>
+[%
+            start_count = now - limit;
+        END;
+        IF now + limit < count_page;
+            end_count = now + limit;
+        ELSE;
+            end_count = count_page;
+        END;
+
+        FOREACH page IN [start_count..end_count];
+%]
+[%          now == page ? '<span>' : '<a href="' _ pager_query _ page _ '">' %][% page %][% now == page ? '</span>' : '</a>' %]
+[%
+        END;
+
+
+        IF now + limit < count_page;
+%]
+<a href="[% pager_query _ (now + limit + 1) %]">...</a>
+[%
+        END
+%]
+</p>
+</div>
+[%
+    END
+%]

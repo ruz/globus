@@ -35,7 +35,7 @@
             <h2 class="title"><a href="[% item.link %]" title="Entry permalink">[% item.title %]</a></h2>
             <h3 class="author">
                 <a href="/"class="avatar" title="Author`s avatar"><img src="/avatar_small.png" width="50" height="50" alt="[% item.author %]`s"></a>
-                <span class="timestamp" title="[% item.date %]">[% item.date %]</span>
+                <span class="timestamp" title="[%item.date%]">[% item.date.strftime('%d.%m.%Y') %]</span>
                 <a href="/" title="Link to author">[% item.author %]</a></h3>
                 </div>
                 [% item.content %]
@@ -59,6 +59,14 @@
 
 </div>
 
+[%debug.dump | html; %]<br>
+items count=[% items.size; %]<br>
+
+Locale: [% C.languages.dump %]<br>
+
+[% PROCESS pager.tt %]<br>
+
 </body>
 </html>    
-	
+
+
