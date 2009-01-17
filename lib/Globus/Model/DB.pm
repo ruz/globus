@@ -6,7 +6,7 @@ use base 'Catalyst::Model::DBIC::Schema';
 __PACKAGE__->config(
 	schema_class => 'Globus::DB',
 		connect_info => [sub {
-			my ($dsn, $user, $pass) = @{$cfg->{DB}};
+			my ($dsn, $user, $pass) = @{Globus->config->{DB}};
 			my $dbh=DBI->connect($dsn, $user, $pass,{ autocommit=>1 });
 			if ( $dsn =~ /SQLite/ ) {
 				$dbh->{unicode}=1;
