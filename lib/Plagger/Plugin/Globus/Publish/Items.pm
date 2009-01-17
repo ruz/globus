@@ -34,7 +34,7 @@ sub feed {
         $keyword =~ s/\s+/_/;
 
         my $lang = $entry->language || $feed_lang;
-        print "$link $language";
+        print "$link $lang";
         my $tags = $entry->tags;
 
         #print Dumper( $tags );
