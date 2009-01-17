@@ -18,6 +18,7 @@ requires 'Catalyst::Model::DBIC::Schema';
 requires 'SQL::Translator';
 requires 'parent';
 requires 'ex::lib';
+requires 'Class::Date';
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 catalyst;
