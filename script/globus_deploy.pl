@@ -7,6 +7,6 @@ use YAML qw(Dump Bless);
 
 use Globus::DB;
 
-my $schema=Globus::DB->connect;
+my $schema=Globus::DB->connect( Globus::DB->our_connect_handler );
 
 $schema->deploy({ add_drop_table => 1, },'');
