@@ -8,7 +8,10 @@ all_from 'lib/Globus.pm';
 requires 'Catalyst::Runtime' => '5.7015';
 requires 'Catalyst::Plugin::ConfigLoader';
 requires 'Catalyst::Plugin::Static::Simple';
+requires 'Catalyst::Plugin::StackTrace';
+requires 'Catalyst::Plugin::Unicode';
 requires 'Catalyst::Action::RenderView';
+requires 'Catalyst::View::TT';
 requires 'parent';
 requires 'ex::lib';
 requires 'Config::General'; # This should reflect the config file format you've chosen
