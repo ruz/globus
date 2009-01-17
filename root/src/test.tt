@@ -1,0 +1,4 @@
+[%- # -*- Encoding: utf-8; mode: html -*- -%]
+[% USE Dumper %]
+---
+[% Dumper.dump(C.model('DB')) %]
