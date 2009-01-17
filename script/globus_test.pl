@@ -4,8 +4,7 @@ use strict;
 use warnings;
 use Getopt::Long;
 use Pod::Usage;
-use FindBin;
-use lib "$FindBin::Bin/../lib";
+use ex::lib "../lib";
 use Catalyst::Test 'Globus';
 
 my $help = 0;

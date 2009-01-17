@@ -28,18 +28,24 @@ Globus::Controller::Root - Root Controller for Globus
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
-
-    # Hello Wrld
-	$c->stash->{template} = 'index.tt';
-    #$c->response->body( $c->welcome_message );
+    $c->stash->{template} = 'index.tt';
 }
 
 sub default :Path {
     my ( $self, $c ) = @_;
     $c->response->body( 'Page not found' );
     $c->response->status(404);
-    
 }
+
+
+
+sub test :Local :Args(0) {
+    my ( $self, $c ) = @_;
+    my $s=$c->{stash};
+    my $schema=$c->model('DB'); #how to optain DB schema in controller
+    $s->{template}='test.tt';
+}
+
 
 =head2 end
 

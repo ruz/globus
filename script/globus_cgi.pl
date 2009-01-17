@@ -4,8 +4,7 @@ BEGIN { $ENV{CATALYST_ENGINE} ||= 'CGI' }
 
 use strict;
 use warnings;
-use FindBin;
-use lib "$FindBin::Bin/../lib";
+use ex::lib "../lib";
 use Globus;
 
 Globus->run;

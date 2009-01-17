@@ -1,13 +1,12 @@
 #!/usr/bin/perl
 
 use strict;
-use lib "lib";
+use ex::lib "../lib";
 use Data::Dumper;
 use YAML qw(Dump Bless);
 
 use Globus::DB;
-my $cfg=YAML::LoadFile("Globus.yml");
-
+my $cfg=YAML::LoadFile("$INC[0]/../Globus.yml");
 
 my $schema=Globus::DB->connect(sub {
                              my ($dsn, $user, $pass) = @{$cfg->{DB}};
