@@ -48,7 +48,7 @@ sub feed {
             title => $entry->title,
             content => $entry->body,
             author => $entry->author || 'test',
-            date => Class::Date->new( $date->epoch() ) ,
+            date => $date,
         });
 
     }

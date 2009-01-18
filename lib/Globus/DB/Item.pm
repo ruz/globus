@@ -3,7 +3,7 @@ package Globus::DB::Item;
 use strict;
 use warnings;
 
-use Class::Date ();
+use DateTime::Format::MySQL;
 use base 'DBIx::Class';
 __PACKAGE__->load_components(qw/UTF8Columns Core/);
 __PACKAGE__->table("items");
@@ -25,8 +25,8 @@ __PACKAGE__->add_unique_constraint("item_keyword_Idx", ["keyword"]);
 
 __PACKAGE__->inflate_column(
     date => {
-        'inflate'   => sub { Class::Date::date($_[0]) },
-        'deflate'   => sub { $_[0]->string },
+        'inflate'   => sub { DateTime::Format::MySQL->parse_datetime($_[0]) },
+        'deflate'   => sub { $_[0]->strftime('%Y-%m-%d %H:%M:%S') },
     }
 );
 
