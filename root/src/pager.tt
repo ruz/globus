@@ -1,4 +1,4 @@
-[% 
+﻿[% 
     count_page      = pager.page.count || 1;
     now             = pager.page.now || 1;
     limit           = limit || 7;

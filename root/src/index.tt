@@ -1,22 +1,10 @@
-[%- # -*- Encoding: utf-8; mode: html -*- -%]
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
-<html>
-    <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="/c/style.css" type="text/css"> 
-    <link rel="alternate" type="text/xml" title="Planet Perl (RSS1.0)" href="rss10.xml"> 
-    <link rel="shortcut icon" href="/favicon.png">
-    <base href="/" target="_blank" />
-    
-    <title>Perl $globus</title>
-    </head>
-<body>
+﻿[%- # -*- Encoding: utf-8; mode: html -*- -%]
 
 <div id="wrapper">
     
 <div id="header">
     <h1><a href="/" title="Back to main">Perl $globus</a></h1>
-    </div
+    </div>
 
 <div id="sidebar">
     <dl class="authors">
@@ -41,7 +29,7 @@
                 [% item.content %]
         <dl class="tags">
             <dt>#&nbsp;</dt>
-            <dd><a href="/item/[% item.keyword | html %]" title="title">[% item.title %]</dd>
+            <dd><a href="/item/[% item.keyword | html %]" title="title">[% item.title %]</a></dd>
             </dl>
             </div>
             <!-- /entry -->
@@ -52,7 +40,7 @@
 <div id="footer">
     <ul>
         <li>&copy; 2009 Hackmeet Russia&nbsp;|&nbsp;</li>
-        <li><a href="/about">О проекте</a>&nbsp;e|&nbsp;</li>
+        <li><a href="/about">О проекте</a>&nbsp;|&nbsp;</li>
         <li><a href="/contacts">Контакты</a></li>
         </ul>
         </div>
@@ -65,8 +53,4 @@ items count=[% items.size; %]<br>
 Locale: [% C.languages.dump %]<br>
 
 [% PROCESS pager.tt %]<br>
-
-</body>
-</html>    
-
 
