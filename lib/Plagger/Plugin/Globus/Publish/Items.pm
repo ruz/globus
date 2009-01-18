@@ -29,13 +29,9 @@ sub feed {
     foreach my $entry ($args->{feed}->entries) {
         my $link = $entry->permalink;
         my $title = $entry->title;
-        my $date = DateTime::Format::ISO8601->parse_datetime( $entry->date );
-
         my $lang = $entry->language || $feed_lang;
         print "$link $lang\n";
         my $tags = $entry->tags;
-
-        #print Dumper( $tags );
 
         my $item = $schema->resultset('Item')->find_or_create( {
             lang => $lang,
@@ -44,7 +40,7 @@ sub feed {
             title => $entry->title,
             content => $entry->body,
             author => $entry->author || 'test',
-            date => Class::Date->new( $date->epoch() ) ,
+            date => Class::Date->new( $entry->date->epoch() ) ,
         });
     }
 
