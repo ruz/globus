@@ -34,7 +34,7 @@ sub feed {
         my $keyword = $date->ymd('_') .' '. unidecode( $title );
         $keyword =~ s/\s+/_/;
 
-        my $lang = $entry->language || $feed_lang || 'unknown';
+        my $lang = $entry->language || $feed_lang;
         print "$link $lang\n";
         my $tags = $entry->tags;
 

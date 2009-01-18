@@ -16,7 +16,7 @@ __PACKAGE__->add_columns(
   content => { data_type => "TEXT", default_value => undef, is_nullable => 1,},
   author => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
   source => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
-  lang => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
+  lang => { data_type => "VARCHAR", default_value => undef, is_nullable => 1, size => 255, },
 );
 
 __PACKAGE__->utf8_columns(qw/keyword title content author source/);
