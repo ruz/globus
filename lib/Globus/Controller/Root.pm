@@ -101,6 +101,21 @@ sub items :Path {
     $c->stash->{template} = 'index.tt';
 }
 
+#sub item :Regex('^item\/(\w+)') {
+sub item :Local Args(1) {
+	my ($self,$c,$keyword) = @_;
+    my $item = $c->model('DB::Item')->single( { keyword => $keyword,} );
+	if ($item) {
+        $c->stash->{template} = 'item.tt';
+        $c->stash->{item} = $item;
+    }
+    else {
+        $c->stash->{template} = 'item_not_found.tt';
+    }
+    #use Data::Dumper;
+    #$c->response->body( Dumper($args) );
+}
+
 sub about :Local :Args(0) {
     my ( $self, $c ) = @_;
     my $s=$c->{stash};

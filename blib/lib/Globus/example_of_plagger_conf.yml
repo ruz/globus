@@ -1,0 +1,28 @@
+---
+global:
+  timezone: Europe/Moscow
+  timeout: 60
+  assets_path: plagger/assets
+  log:
+    level: debug
+  cache:
+    class: Plagger::Cache::Null
+
+plugins:
+  - module: Subscription::Config
+    config:
+      feed:
+        - http://perl6.ru/rss/
+
+  - module: Aggregator::Simple
+
+#  - module: Filter::Rule
+#    rule:
+#      - module: Deduped
+#        path: /tmp/plagger-moscow.db
+
+  - module: Publish::MoscowNews
+    config:
+      lang: ru
+
+

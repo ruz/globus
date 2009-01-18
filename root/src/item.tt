@@ -1,0 +1,6 @@
+[%- # -*- Encoding: utf-8; mode: html -*- -%]
+Item ready
+[% item.id %]
+<hr>
+[% item.content %]
+<hr>
