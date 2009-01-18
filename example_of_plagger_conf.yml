@@ -10,12 +10,8 @@ global:
     class: Plagger::Cache::Null
 
 plugins:
-  - module: Subscription::Config
+  - module: Globus::Subscription
     config:
-      feed:
-        - http://perl6.ru/rss/
-        - http://dr-japh.livejournal.com/data/rss
-        - http://feeds.delicious.com/v2/rss/tag/russian+perl?count=15
 
   - module: Filter::DeliciousFeedTags
   
