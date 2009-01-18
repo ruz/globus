@@ -30,8 +30,6 @@ sub feed {
         my $link = $entry->permalink;
         my $title = $entry->title;
         my $date = DateTime::Format::ISO8601->parse_datetime( $entry->date );
-        my $keyword = $date->ymd('_') .' '. unidecode( $title );
-        $keyword =~ s/\s+/_/;
 
         my $lang = $entry->language || $feed_lang;
         print "$link $lang\n";
@@ -41,7 +39,6 @@ sub feed {
 
         my $item = $schema->resultset('Item')->find_or_create( {
             lang => $lang,
-            keyword => $keyword,
             source => 'test',
             link => $link,
             title => $entry->title,
@@ -49,7 +46,6 @@ sub feed {
             author => $entry->author || 'test',
             date => Class::Date->new( $date->epoch() ) ,
         });
-
     }
 
     $context->log(

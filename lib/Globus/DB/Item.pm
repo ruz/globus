@@ -49,4 +49,22 @@ sub hash {
 	my $self = shift;
 	+{ map { $_ => $self->$_ } $self->columns };
 }
+
+use Text::Unidecode;
+
+sub new {
+    my ( $class, $attrs ) = @_;
+
+    unless ( defined $attrs->{'keyword'} && length $attrs->{'keyword'} ) {
+        my $keyword = $attrs->{'date'} .' '. unidecode( $attrs->{'title'} );
+
+        # we need more filtering
+        $keyword =~ s/\s+/_/g;
+
+        $attrs->{'keyword'} = $keyword;
+    }
+
+    return $class->next::method($attrs);
+}
+
 1;
