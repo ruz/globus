@@ -2,7 +2,6 @@ use strict;
 use warnings;
 
 package Plagger::Plugin::Globus::Publish::Items;
-
 use base qw(Plagger::Plugin);
 
 use Globus::DB;
@@ -26,7 +25,7 @@ sub feed {
     my $schema = Globus::DB->connect( Globus::DB->our_connect_handler );
 
     my $feed = $args->{feed};
-    my $feed_lang = $feed->language;
+    my $feed_lang = $feed->language || 'ru';
     foreach my $entry ($args->{feed}->entries) {
         my $link = $entry->permalink;
         my $title = $entry->title;
