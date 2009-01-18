@@ -1,5 +1,6 @@
 package Catalyst::Plugin::Globus::Filters;
-
+# -*- mode: cperl; encoding: utf8 -*-
+use utf8;
 use warnings;
 use strict;
 
