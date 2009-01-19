@@ -1,0 +1,5 @@
+
+Получить список хуков которые есть в plagger'е:
+
+    sh scripts/globus_list_plagger_hooks.sh
+
