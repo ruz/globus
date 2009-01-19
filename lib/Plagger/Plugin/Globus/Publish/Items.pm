@@ -5,10 +5,6 @@ package Plagger::Plugin::Globus::Publish::Items;
 use base qw(Plagger::Plugin);
 
 use Globus::DB;
-use DateTime::Format::ISO8601;
-use Text::Unidecode;
-use Class::Date qw();
-
 use Data::Dumper;
 
 sub register {
