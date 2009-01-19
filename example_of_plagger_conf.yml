@@ -14,15 +14,16 @@ plugins:
     config:
 
   - module: Filter::DeliciousFeedTags
-  
+
   - module: Aggregator::Simple
 
+# XXX: This plugin uses Text::Language::Guess that doesn't make good job for us!
 #  - module: Filter::GuessLanguage
 #    config:
 #      languages:
 #        - en
-#        - de
 #        - ru
+## may fail with target both
 #      target: both
 
 #  - module: Filter::Rule
