@@ -1,0 +1,22 @@
+
+
+Альясы:
+    git ci -> git commit:
+        git config --global alias.ci commit
+
+        или только для данного репозитория:
+        git config alias.ci commit
+
+        или ручками:
+        vi ~/.gitconfig
+            [alias]
+                    ci = commit
+
+        или для данного репозитория ручками:
+        vi ~/.git/config
+            [alias]
+                    ci = commit
+
+    хорошая дока на примерах по альясам:
+    http://git.or.cz/gitwiki/Aliases
+
