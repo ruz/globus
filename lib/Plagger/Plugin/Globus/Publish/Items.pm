@@ -20,6 +20,8 @@ sub feed {
 
     my $schema = Globus::DB->connect( Globus::DB->our_connect_handler );
 
+    my $counter = 0;
+
     my $feed = $args->{feed};
     my $feed_lang = $feed->language || 'ru';
     foreach my $entry ($args->{feed}->entries) {
@@ -38,12 +40,13 @@ sub feed {
             author => $entry->author || 'test',
             date => $entry->date,
         });
+        $counter++;
     }
 
     $context->log(
         info => sprintf(
-            "Added %d entries",
-            $args->{feed}->count
+            "Added %d entries out of %d",
+            $counter, $args->{feed}->count
         )
     );
 }
