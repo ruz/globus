@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 use base 'DBIx::Class';
-__PACKAGE__->load_components(qw/InflateColumn::DateTime UTF8Columns Core/);
+__PACKAGE__->load_components(qw/UTF8Columns Core/);
 __PACKAGE__->table("tags");
 __PACKAGE__->add_columns(
   id => { data_type => "INTEGER", default_value => undef, is_nullable => 0, is_auto_increment => 1},
