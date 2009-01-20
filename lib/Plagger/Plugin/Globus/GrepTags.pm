@@ -1,8 +1,8 @@
+use strict;
+use warnings;
+use utf8;
+
 package Plagger::Plugin::Globus::GrepTags;
-
-use strict;
-
-use strict;
 use base qw( Plagger::Plugin );
 
 sub register {
@@ -17,15 +17,19 @@ sub feed {
     my($self, $context, $args) = @_;
 
     for my $entry ($args->{feed}->entries) {
-        $args->{feed}->delete_entry($entry)
-            if exists $entry->{tags} and !grep { /(?:perl)/i } @{ $entry->{tags} };
+        my $tags = $entry->tags;
+        next unless @$tags;
+        next if grep /(?:perl|перл)/i, @$tags;
+
+        $context->log(debug => "Deleting " . $entry->permalink . " since it has tags (". join(', ', @$tags) . ") non of which is perl");
+
+        $args->{feed}->delete_entry($entry);
     }
 
-    if ($args->{feed}->count == 0) {
+    unless ($args->{feed}->count) {
         $context->log(debug => "Deleting " . $args->{feed}->title . " since it has 0 entries");
         $context->update->delete_feed($args->{feed})
     }
-
 }
 
 1;
