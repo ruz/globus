@@ -9,8 +9,8 @@ __PACKAGE__->table("tags");
 __PACKAGE__->add_columns(
   id => { data_type => "INTEGER", default_value => undef, is_nullable => 0, is_auto_increment => 1},
   en => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
-  ru => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
-  klingon => { data_type => "VARCHAR", default_value => undef, is_nullable => 0, size => 255, },
+  ru => { data_type => "VARCHAR", default_value => undef, is_nullable => 1, size => 255, },
+  klingon => { data_type => "VARCHAR", default_value => undef, is_nullable => 1, size => 255, },
 );
 
 __PACKAGE__->utf8_columns(qw/en ru klingon/);
