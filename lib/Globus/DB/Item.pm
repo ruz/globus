@@ -56,7 +56,7 @@ sub new {
     my ( $class, $attrs ) = @_;
 
     unless ( defined $attrs->{'keyword'} && length $attrs->{'keyword'} ) {
-        my $keyword = $attrs->{'date'} .' '. unidecode( $attrs->{'title'} );
+        my $keyword = $attrs->{'date'}->ymd('-') .' '. unidecode( $attrs->{'title'} );
 
         # we need more filtering
         $keyword =~ s/\s+/_/g;
