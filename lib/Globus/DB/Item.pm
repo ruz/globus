@@ -38,7 +38,7 @@ sub sqlt_deploy_hook {
 }
 
 __PACKAGE__->has_many(item_tag => "Globus::DB::ItemTag", 'item');
-__PACKAGE__->many_to_many(tags => itemtags => 'tag');
+__PACKAGE__->many_to_many(tags => item_tag => 'tag');
 
 sub REF {
     my $self=shift;
