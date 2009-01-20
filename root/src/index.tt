@@ -28,8 +28,10 @@
                 </div>
                 [% item.content %]
         <dl class="tags">
+            [% FOREACH tag IN item.tags %]
             <dt>#&nbsp;</dt>
-            <dd><a href="/item/[% item.keyword | html %]" title="title">[% item.title %]</a></dd>
+            <dd><a href="/items/tag=[% tag.en | html %]" title="title">[% tag.en %]</a></dd>
+            [% END %]
             </dl>
             </div>
             <!-- /entry -->
