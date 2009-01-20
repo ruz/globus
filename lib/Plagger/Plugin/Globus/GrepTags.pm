@@ -13,6 +13,12 @@ sub register {
     );
 }
 
+# TODO:
+# add support for advanced filtering, for example:
+# (catalyst AND perl) OR
+#   (catalyst AND !adobe AND !ati AND !cisco AND !text:"adobe flash catalyst" AND !text:"flash catalyst")
+# All this should be stored in a plugin's config
+
 sub feed {
     my($self, $context, $args) = @_;
 
@@ -33,4 +39,3 @@ sub feed {
 }
 
 1;
-
