@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use utf8;
 
 package Plagger::Plugin::Globus::Publish::Items;
 use base qw(Plagger::Plugin);
@@ -23,23 +24,41 @@ sub feed {
     my $counter = 0;
 
     my $feed = $args->{feed};
-    my $feed_lang = $feed->language || 'ru';
-    foreach my $entry ($args->{feed}->entries) {
+    my $feed_lang = $feed->language || '';
+    foreach my $entry ( $feed->entries ) {
         my $link = $entry->permalink;
         my $title = $entry->title;
         my $lang = $entry->language || $feed_lang;
-        print "$link $lang\n";
-        my $tags = $entry->tags;
 
+        # TODO: we generate keyword in Item::new, however it's
+        # the only unique field in items besides id, find_or_create
+        # fails to find correct record even if it already exist
         my $item = $schema->resultset('Item')->find_or_create( {
-            lang => $lang,
-            source => 'test',
-            link => $link,
-            title => $entry->title,
+            link    => $link,
+            date    => $entry->date,
+            author  => $entry->author || 'test',
+            title   => $entry->title,
             content => $entry->body,
-            author => $entry->author || 'test',
-            date => $entry->date,
+            lang    => $lang,
+            source  => 'test',
         });
+
+        my $tags = $entry->tags;
+        foreach my $tag ( map "$_", @$tags ) {
+            # TODO: use lame detection while we don't have better solution
+            my $tag_lang = ($tag =~ /[а-я]/i? 'ru' : 'en');
+
+            # XXX: in theory the following should just work, but it doesn't
+            # $item->find_or_create_related('tags', { $tag_lang => $tag } );
+            my $tag_rec = $schema->resultset('Tag')->find_or_create( {
+                $tag_lang => $tag
+            });
+
+            my $item_tag_rec = $schema->resultset('ItemTag')->find_or_create( {
+                item => $item->id, tag => $tag_rec->id
+            });
+        }
+
         $counter++;
     }
 
