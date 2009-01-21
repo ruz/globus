@@ -1,0 +1,42 @@
+# README:
+#
+# запустить бот:
+#       plagger-ircbot -c misc/plagger_announce_commits.yml
+#
+# периодически передаем ему данные через cron
+#       plagger -c misc/plagger_announce_commits.yml
+# 
+# TODO: задебажить почему не работает cache правильно
+---
+global:
+  timezone: Europe/Moscow
+  timeout: 60
+  assets_path: /home/cubic/projs/mods/plagger/assets
+  log:
+    level: debug
+  cache:
+    base: /tmp/plagger.irc.github.globus.master/
+
+plugins:
+  - module: Subscription::Config
+    config:
+      feed:
+        - url: http://github.com/feeds/ruz/commits/globus/master
+        - url: http://wiki.github.com/ruz/globus/wikis.atom
+
+  - module: Aggregator::Simple
+
+# TODO: написать плагин для плаггера, который переворачивает список записей
+# что-то типа: Plagger::Plugin::Modify::ReverseEntries
+
+  - module: Notify::IRC
+    config:
+      daemon_port: 7771
+      nickname: gitbot
+      server_host: utf8.rusnet.org.ru
+      server_port: 7770
+      server_channels:
+        - #moscow.pm
+      charset: utf-8
+      announce: notice
+
