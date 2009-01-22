@@ -48,6 +48,7 @@ sub load {
         $feed->url($record->link)
             or $context->error("Feed URL is missing");
         #$feed->title($record->title) if $record->title;
+        $feed->meta->{'globus'}{'config'} = $record->config;
         $context->subscription->add($feed);
     }
 }
