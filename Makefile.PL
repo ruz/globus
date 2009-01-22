@@ -23,6 +23,9 @@ requires 'Class::Date';
 # converts unicode into readable ASCII
 requires 'Text::Unidecode';
 
+requires 'Regexp::Common';
+requires 'Parse::BooleanLogic' => '0.06';
+
 requires 'Config::General'; # This should reflect the config file format you've chosen
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 catalyst;
