@@ -11,6 +11,8 @@ use warnings;
 use Getopt::Long;
 use Pod::Usage;
 use ex::lib "../lib";
+use FindBin;
+use File::Spec;
 
 my $debug             = 0;
 my $fork              = 0;
@@ -52,6 +54,7 @@ if ( $debug ) {
 # This is require instead of use so that the above environment
 # variables can be set at runtime.
 require Globus;
+$restart_directory ||= File::Spec->catdir( $FindBin::Bin, '..' );
 
 Globus->run( $port, $host, {
     argv              => \@argv,
