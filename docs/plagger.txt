@@ -1,3 +1,12 @@
+Плаггер теперь на гитхабе: http://github.com/miyagawa/plagger/network
+
+Получить список хуков которые есть в plagger'е:
+
+    sh scripts/globus_list_plagger_hooks.sh
+
+
+Все остальное история:
+
 Руслан добивается активно получения прав комитить в репозиторий,
 но пока без результатов.
 
@@ -6,6 +15,8 @@
     Я запустил импорт plagger'а из svn в git. miyagawa в курсе
     посмотрим, что из этого выйдет
 
+        мой импорт развалился, миагава сделал свой - работает
+
 Репозиторий svn: http://svn.bulknews.net/repos/plagger
 
     Нам нужен только trunk/plagger
@@ -13,8 +24,3 @@
 Репозиторий git: http://github.com/ruz/plagger/tree
 
     Не известно сколько он будет импортироваться.
-
-Получить список хуков которые есть в plagger'е:
-
-    sh scripts/globus_list_plagger_hooks.sh
-
